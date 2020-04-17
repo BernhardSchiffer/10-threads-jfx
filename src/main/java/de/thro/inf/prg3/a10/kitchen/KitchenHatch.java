@@ -21,7 +21,7 @@ public interface KitchenHatch {
 	 * Dequeue an outstanding order
 	 * @return an order or null if all orders are done
 	 */
-	default Order dequeueOrder() {
+	default Order dequeueOrder() throws InterruptedException {
 		return dequeueOrder(1000);
 	}
 
@@ -30,7 +30,7 @@ public interface KitchenHatch {
 	 * @param timeout timeout to pass to the wait call if no orders are present
 	 * @return an order or null if all orders are done
 	 */
-	Order dequeueOrder(long timeout);
+	Order dequeueOrder(long timeout) throws InterruptedException;
 
 	/**
 	 * Get the remaining count of orders
@@ -42,7 +42,7 @@ public interface KitchenHatch {
 	 * Dequeue a completed dish
 	 * @return hopefully hot dish to serve to a guest
 	 */
-	default Dish dequeueDish() {
+	default Dish dequeueDish() throws InterruptedException {
 		return dequeueDish(1000);
 	}
 
@@ -51,7 +51,7 @@ public interface KitchenHatch {
 	 * @param timeout timeout to pass to the wait call if no meals are present
 	 * @return hopefully hot dish to serve to a guest
 	 */
-	Dish dequeueDish(long timeout);
+	Dish dequeueDish(long timeout) throws InterruptedException;
 
 	/**
 	 * Enqueue a new completed dish to be served by a waiter
